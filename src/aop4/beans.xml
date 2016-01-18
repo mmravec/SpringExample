@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+    
+    <bean id="performer" class="aop.SimplePerformer">
+        <property name="name" value="John Black"/>
+    </bean>
+    
+    <bean id="otherPerformer" class="aop.SimplePerformer">
+        <property name="name" value="James Bond"/>
+    </bean>
+
+    <bean id="audience" class="aop2.Audience" />
+    
+    <aop:config>
+        <aop:aspect ref="audience">
+            <aop:pointcut
+                id="performance"                
+                expression="execution(* aop.Performer.perform(..))"/>
+            
+            <aop:before
+                method="takeSeats"
+                pointcut-ref="performance" />
+            
+            <aop:before
+                method="turnOffCellPhones"                
+                pointcut-ref="performance" />
+            
+            <aop:after-returning
+                method="applaud"                
+                arg-names="performer"
+                pointcut="execution(* aop.Performer.perform(..)) &amp;&amp; target(performer) &amp;&amp; bean(otherPerformer)" 
+                />
+            
+            <aop:after-throwing
+                method="demandRefund"
+                pointcut-ref="performance" />
+        </aop:aspect>
+    </aop:config>
+</beans>

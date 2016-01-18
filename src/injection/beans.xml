@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <!-- Injecting simple values -->
+    <bean id="injectingSimpleBean" class="injection.InjectingSimpleValuesBean">
+        <property name="name" value="John Smith"/>
+        <property name="age" value="35"/>
+        <property name="height" value="1.78"/>
+        <property name="isProgrammer" value="true"/>
+        <property name="ageInSeconds" value="1103760000"/>
+    </bean>
+    
+    <!-- Injecting other beans -->
+    <bean id="foo" class="injection.Foo"/>
+    <bean id="bar" class="injection.Bar"/>
+    
+    <bean id="injectingRefBean" class="injection.InjectingRefBean">
+        <constructor-arg ref="foo"/>
+        <constructor-arg ref="bar"/>
+    </bean>
+    
+    <!-- Injecting through constructor -->
+    <bean id="constructorInjection" class="injection.ConstructorInjectionBean">        
+        <constructor-arg value="7500000"/>
+        <constructor-arg value="42"/>
+        <!--
+        <constructor-arg type="java.lang.String" value="42"/>
+        <constructor-arg type="int" value="7500000"/>
+        -->
+        <!--
+        <constructor-arg index="1" value="42"/>        
+        <constructor-arg index="0" value="7500000"/>
+        -->
+    </bean>        
+</beans>

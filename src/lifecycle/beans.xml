@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <bean id="nameAwareBean" class="lifecycle.NameAwareBean"/>
+    
+    <bean id="factoryAwareBean" class="lifecycle.FactoryAwareBean"/>
+    
+    <bean id="contextAwareBean" class="lifecycle.ContextAwareBean"/>
+    
+    <bean id="initalizableBean" class="lifecycle.InitializableBean"/>
+    
+    <bean id="disposableBean" class="lifecycle.DestroyableBean"/>    
+    
+    <bean id="initDestroyBean" class="lifecycle.InitDestroyBean" 
+          init-method="init" destroy-method="destroy"/>
+    
+    <!-- Commnon annotation bean post processor is required to be used with annotations -->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    
+    <bean id="annotatedInitDestroyBean" class="lifecycle.AnnotatedInitDestroyBean"/>
+
+    <!-- Testing required properties -->
+    <bean id="requiredNameBean" class="lifecycle.RequiredNameBean">
+        <property name="name" value="Value"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+    
+    <bean id="annotatedRequiredNameBean" class="lifecycle.AnnotatedRequiredNameBean">
+        <property name="name" value="Value"/>
+    </bean>
+</beans>

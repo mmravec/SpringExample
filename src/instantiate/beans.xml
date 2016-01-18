@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <!-- Example 1: Instantiation using a constructor -->
+    <bean id="greetingService1" class="greetings.GreetingServiceImpl">
+        <property name="greeting" value="Hello World!" />
+    </bean>
+    
+    <!-- Example 2: Instantiation using a static factory method -->
+    <bean id="greetingService2" class="instantiate.StaticFactoryBean" 
+          factory-method="createInstance">
+        <property name="greeting" value="Static Factory Hello World!" />
+        <!--
+        <constructor-arg value="Hello World!" />
+        -->
+    </bean>
+    
+    <!-- Example 3: Instantiation using an instance factory method -->
+    <bean id="greetingServiceFactory" class="instantiate.InstanceFactoryBean" />    
+    
+    <bean id="greetingService3" factory-bean="greetingServiceFactory" 
+          factory-method="createInstance">
+        <property name="greeting" value="Instance Factory Hello World!" />
+        <!--
+        <constructor-arg value="Hello World!" />
+        -->
+    </bean>    
+</beans>

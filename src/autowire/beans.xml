@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <bean id="foo" class="autowire.Foo"/>
+    <bean id="bar" class="autowire.Bar"/>
+    
+    <bean id="targetByName" autowire="byName" class="autowire.Target"/>
+    <bean id="targetByType" autowire="byType" class="autowire.Target"/>
+    <bean id="targetConstructor" autowire="constructor" class="autowire.Target"/>
+    <bean id="targetAutodetect" autowire="autodetect" class="autowire.Target"/>
+</beans>
